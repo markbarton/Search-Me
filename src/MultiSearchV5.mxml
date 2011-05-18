@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   xmlns:multidb="shinydesign.multidb.*"
+			   xmlns:search="shinydesign.multidb.views.search.*"
+			   xmlns:datagrid="shinydesign.multidb.views.datagrid.*"
+			   xmlns:components="com.pfp.components.*" 
+			   xmlns:shinycomponents="shinydesign.components.dualpanel.*"
+			  xmlns:utils="shinydesign.multidb.utils.*" chromeColor="haloGreen">
+	
+	<fx:Script>
+		<![CDATA[
+			import shinydesign.components.dualpanel.SpinSkin;
+			import shinydesign.components.dualpanel.VerticalWipeSkin;
+		]]>
+	</fx:Script>
+	<fx:Style source="assets/main.css" />
+	<fx:Declarations>
+		<multidb:MultiDBContext contextView="{this}" />	
+		
+		
+	</fx:Declarations>
+	<s:transitions>
+		<s:Transition fromState="*" toState="searchSummary">
+			<s:Fade target="{summarySearch}" alphaFrom="0.0"  alphaTo="1.0"/>
+		</s:Transition>
+		
+	</s:transitions>
+	<s:layout>
+		<s:VerticalLayout paddingLeft="5"/>
+	</s:layout>
+	<s:states>
+		<s:State name="base" />
+		<s:State name="login" />
+		<s:State name="loggedIn" />
+		<s:State name="results" />
+		<s:State name="searchSummary" />
+		<s:State name="searchDetail" />
+		
+	</s:states>
+	
+	<search:SearchInput id="searchInputView" includeIn="[loggedIn,results,searchSummary]" />
+	
+	<shinycomponents:DeferredDualPanel
+		height="90%"
+		transitionDuration="200" id="resultsPanel"
+		skinClass="shinydesign.components.dualpanel.SpinSkin"
+		includeIn="results" includeInLayout.searchSummary="false">
+		<shinycomponents:frontView>		
+			<search:ResultsGrid  id="resultsGrid"   height="100%" name="Front" paddingRight="5" />	
+		</shinycomponents:frontView>
+		
+		<shinycomponents:backView >	
+			<search:ResultDetail id="resultDetail" name="Back"  width="{resultsGrid.width}" height="95%" />
+		</shinycomponents:backView>
+	</shinycomponents:DeferredDualPanel>
+	
+	<search:SummarySearch id="summarySearch" includeIn="searchSummary"  height="95%" width="{resultsPanel.width}"   />
+	
+</s:Application>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import shinydesign.multidb.events.SearchInputEvent;
+			import shinydesign.multidb.events.SearchResultEvent;
+			protected function handleClick():void
+			{
+				dispatchEvent(new SearchInputEvent(SearchInputEvent.SEARCH_SUBMITTED,search.text))
+			}
+			protected function handleSummaryClick():void
+			{
+				dispatchEvent(new SearchInputEvent(SearchInputEvent.DISPLAY_SEARCH_SUMMARY))
+			}
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout paddingTop="5"/>
+	</s:layout>
+	<s:TextInput id="search" />
+	<s:Button id="searchButton" click="handleClick()" name="Search" label="Search"/>
+	<s:Button id="summaryButton" click="handleSummaryClick()" visible="false" label="Search Summary (Debug)"  />
+	
+</s:Group>

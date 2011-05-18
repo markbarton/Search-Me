@@ -1,0 +1,63 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+s|Application{
+	fontSize:11;
+}
+
+mx|Grid{
+	padding-left:5;
+	padding-top:5;
+	padding-right:5;
+	padding-bottom:5;
+}
+
+#titleDisplay{
+	fontSize:14;
+	font-weight:bold;
+	vertical-align:middle;
+}
+
+mx|Grid s|Label{
+	padding-left:5;
+	padding-top:5;
+	padding-right:5;
+	padding-bottom:5;
+	vertical-align:middle;
+	text-align:left;
+}
+
+mx|VScrollBar {
+	downArrowUpSkin: Embed(source="/assets/downArrow.png");
+	downArrowOverSkin: Embed(source="/assets/downArrow.png");
+	downArrowDownSkin: Embed(source="/assets/downArrow.png");
+	upArrowUpSkin: Embed(source="/assets/upArrow.png");
+	upArrowOverSkin: Embed(source="/assets/upArrow.png");
+	upArrowDownSkin: Embed(source="/assets/upArrow.png");
+	thumbDownSkin: 
+		Embed(source="/assets/thumb.png",
+		scaleGridLeft="7", scaleGridTop="5", 
+		scaleGridRight="8", scaleGridBottom="7");
+	
+	thumbUpSkin: 
+		Embed(source="/assets/thumb.png",
+		scaleGridLeft="7", scaleGridTop="5", 
+		scaleGridRight="8", scaleGridBottom="7");
+	
+	thumbOverSkin: 
+		Embed(source="/assets/thumb.png",
+		scaleGridLeft="7", scaleGridTop="5", 
+		scaleGridRight="8", scaleGridBottom="7");
+	
+	trackSkin: 
+		Embed(source="/assets/scrolltrack.png",
+		scaleGridLeft="7", scaleGridTop="4", 
+		scaleGridRight="8", scaleGridBottom="6" );      
+}
+
+
+.formLabel{
+background-color:#CDFDB6;
+font-weight:bold;
+}

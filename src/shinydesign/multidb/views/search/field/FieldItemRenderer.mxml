@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false" width="100%">	
+	<s:VGroup  width="100%" clipAndEnableScrolling="true">
+		<s:Label styleName="formLabel" text="{data.fieldname}" width="100%"/> 
+		<mx:Text text="{data.fieldvalue}"  width="100%"/>
+	</s:VGroup>
+	
+</s:ItemRenderer>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 skinClass="shinydesign.multidb.views.search.CustomPanelSkin"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"  chromeColor="haloGreen"  title="{searchRecord.title}" width="100%"  right="5">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+  
+	<fx:Script>
+		<![CDATA[
+			import shinydesign.multidb.events.SearchInputEvent;
+			import shinydesign.multidb.models.vo.SearchResultRecord;
+			[Bindable]
+			public var searchRecord:SearchResultRecord;
+
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				dispatchEvent(new SearchInputEvent(SearchInputEvent.CLOSE_DISPLAY_DETAIL))
+			}
+
+
+			protected function openNotes_clickHandler(event:MouseEvent):void
+			{
+				trace(searchRecord.notesURL);	
+				var u:URLRequest = new URLRequest(searchRecord.notesURL);
+					navigateToURL(u,"_self");
+				 
+			}
+
+
+			protected function datagroup1_clickHandler(event:MouseEvent):void
+			{
+				var link:String=event.currentTarget.selectedItems[0].linkURL;
+				var u:URLRequest = new URLRequest(link);
+				navigateToURL(u,"_blank");
+					// TODO Auto-generated method stub
+			}
+
+		]]>
+	</fx:Script>
+ 
+	<s:layout>
+			
+		<s:VerticalLayout  paddingTop="5"  />
+		
+	</s:layout>
+		<s:Scroller width="{this.width}" height="{this.height-40}">
+			<s:VGroup width="100%">
+				
+		<mx:Grid   id="resultDetail" horizontalGap="2" verticalGap="4" right="0">
+		<mx:GridRow > 
+			<mx:GridItem>
+				<s:Label styleName="formLabel" text="Database" width="100%" />
+			</mx:GridItem>
+			<mx:GridItem colSpan="3" width="265">
+				<mx:Text text="{searchRecord.dbtitle}" width="100%"  right="0"/>
+			</mx:GridItem>
+		</mx:GridRow>
+		<mx:GridRow>
+				<mx:GridItem> 
+					<s:Label styleName="formLabel" text="Author" width="100%"/>
+				</mx:GridItem>
+				<mx:GridItem>
+					<s:Label text="{searchRecord.author}"/>
+				</mx:GridItem>
+				<mx:GridItem>
+					<s:Label styleName="formLabel" text="Created" width="100%"/>
+				</mx:GridItem>
+				<mx:GridItem textAlign="left" >
+					<mx:Text text="{searchRecord.created}" textAlign="left"/>
+				</mx:GridItem>
+		</mx:GridRow>
+		<mx:GridRow visible="{searchRecord.hasAttachments}" includeInLayout="{searchRecord.hasAttachments}">
+			<mx:GridItem colSpan="4"> 
+				<s:Label styleName="formLabel" text="Attachments" width="100%"/>
+			</mx:GridItem>
+		</mx:GridRow>
+		<mx:GridRow visible="{searchRecord.hasAttachments}" includeInLayout="{searchRecord.hasAttachments}">
+			<mx:GridItem colSpan="4">
+				<s:List borderVisible="false" 
+						width="100%"
+						itemRenderer="shinydesign.multidb.views.search.attachment.AttachmentItem" dataProvider="{searchRecord.attachments}" click="datagroup1_clickHandler(event)">
+					<s:layout>
+						<s:VerticalLayout rowHeight="20"/>
+					</s:layout>
+				</s:List>
+			</mx:GridItem>
+		</mx:GridRow>
+		<mx:GridRow>
+			<mx:GridItem colSpan="4" id="fieldHolder" paddingLeft="0" paddingRight="0" >
+					
+				<s:DataGroup itemRenderer="shinydesign.multidb.views.search.field.FieldItemRenderer" dataProvider="{searchRecord.fields}" width="100%">
+					<s:layout>
+						<s:VerticalLayout gap="2"/>
+					</s:layout>
+				</s:DataGroup>
+				
+			</mx:GridItem>
+		</mx:GridRow>
+			
+		</mx:Grid>	
+			</s:VGroup>
+		</s:Scroller>
+	
+	<s:controlBarContent>
+		<s:Button label="&lt;&lt; Back" click="button1_clickHandler(event)" />
+		<s:Button label="Open in Lotus Notes" click="openNotes_clickHandler(event)" id="openNotes" />
+		
+	</s:controlBarContent>
+	
+</s:Panel>
